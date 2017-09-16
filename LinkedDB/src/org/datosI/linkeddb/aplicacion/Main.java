@@ -1,4 +1,4 @@
-package com.linkeddb.aplicacion;
+package org.datosI.linkeddb.aplicacion;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -10,7 +10,7 @@ public class Main extends Application{
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		Parent root = FXMLLoader.load(getClass().getResource("/com/linkeddb/aplicacion/VentanaPrincipal.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("/org/datosI/linkeddb/aplicacion/VentanaPrincipal.fxml"));
 		Scene scene = new Scene(root);
 		
 		primaryStage.setScene(scene);

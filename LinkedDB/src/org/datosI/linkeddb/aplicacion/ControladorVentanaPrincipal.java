@@ -1,4 +1,4 @@
-package com.linkeddb.aplicacion;
+package org.datosI.linkeddb.aplicacion;
 
 public class ControladorVentanaPrincipal {
 
