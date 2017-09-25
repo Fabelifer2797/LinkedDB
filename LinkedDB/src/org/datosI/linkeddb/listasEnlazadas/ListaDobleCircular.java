@@ -98,6 +98,10 @@ public class ListaDobleCircular {
 	
 	public NodoDocumentoJSON BuscarDocumento(String Nombre)
 	{
+		if(ListaDobleCircularVacia())
+		{
+			return null;
+		}
 		NodoDocumentoJSON actual = this.getPrimero();
 		
 		while(actual.getSiguiente() != this.getPrimero())
@@ -128,13 +132,15 @@ public class ListaDobleCircular {
 	}
 	
 	public void ImprimirListaDC()
-	{
-		NodoDocumentoJSON actual = this.getPrimero();
-		
-		if (actual == null)
+	{	
+		if(ListaDobleCircularVacia())
 		{
 			System.out.println("Lista vacia");
+			return;
 		}
+		
+		NodoDocumentoJSON actual = this.getPrimero();
+		
 		
 		while (actual.getSiguiente() != this.getPrimero())
 		{

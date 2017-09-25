@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="204.0" prefWidth="264.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="org.datosI.linkeddb.aplicacion.ControladorVentanaStores">
+   <children>
+      <Label layoutX="51.0" layoutY="28.0" text="Digite el nombre del Store:">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <TextField fx:id="TextFieldNombreStore" layoutX="54.0" layoutY="84.0" />
+      <Button fx:id="BotonCrearStore" layoutX="96.0" layoutY="161.0" mnemonicParsing="false" onAction="#AlmacenarStore" text="Aceptar">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Button>
+      <Label fx:id="LabelValidacionNombreStore" layoutX="12.0" layoutY="122.0" prefHeight="19.0" prefWidth="234.0" textFill="RED" />
+   </children>
+</AnchorPane>

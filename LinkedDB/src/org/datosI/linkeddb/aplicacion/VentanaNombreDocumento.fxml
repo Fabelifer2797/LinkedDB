@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="236.0" prefWidth="277.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="org.datosI.linkeddb.aplicacion.ControladorVentanaNombreDocumento">
+   <children>
+      <Button fx:id="BotonAgregarNombreDocumento" layoutX="133.0" layoutY="177.0" mnemonicParsing="false" onAction="#AgregarNombreDocumento" text="Aceptar" />
+      <Label layoutX="3.0" layoutY="29.0" text="Ingrese el nombre del documento que desea crear:">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="TextFieldNombreDocumento" layoutX="56.0" layoutY="82.0" prefHeight="25.0" prefWidth="207.0" />
+      <Label fx:id="LabelValidarNombreDocumento" layoutX="33.0" layoutY="136.0" prefHeight="25.0" prefWidth="275.0" textFill="#f50000" />
+   </children>
+</AnchorPane>
