@@ -106,7 +106,7 @@ public class ListaDobleCircular {
 		
 		while(actual.getSiguiente() != this.getPrimero())
 		{
-			if(actual.getNombre() == Nombre)
+			if( Nombre.equals(actual.getNombre()))
 			{
 				System.out.println("Elemento encontrado");
 				return actual;
@@ -118,7 +118,7 @@ public class ListaDobleCircular {
 			}
 		}
 		
-		if(actual.getNombre() == Nombre)
+		if(Nombre.equals(actual.getNombre()))
 		{
 			System.out.println("Elemento encontrado");
 			return actual;

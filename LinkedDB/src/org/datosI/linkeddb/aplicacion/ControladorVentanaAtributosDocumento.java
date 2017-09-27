@@ -252,17 +252,18 @@ public class ControladorVentanaAtributosDocumento implements Initializable{
     			while(indice < arregloAtributos.size())
     			{
     				AtributosDocumentosJSON atributos = arregloAtributos.get(indice);
-    				if(atributos.getAtributoForaneo() != atributoForaneo)
+    				if( atributoForaneo.equals(atributos.getNombre()) && atributos.getLlavePrimaria() == "Si")
     				{
-    					LabelMensajesError.setText("El atributo de referencia ingresado no existe en el documento. Por favor ingrese un atributo válido");
-    					return false;
+    					
+    					return true;
     				}
     				else
     				{
     					indice++;
     				}
     			}
-    			return true;
+    			LabelMensajesError.setText("El atributo de referencia ingresado no existe en el documento o no es llave primaria. Por favor ingrese un atributo válido");
+    			return false;
     		}
     	}
     		
