@@ -9,6 +9,7 @@ public class NodoDocumentoJSON {
 	private NodoDocumentoJSON siguiente;
 	private NodoDocumentoJSON anterior;
 	private NodoDocumentoJSON documentoSiguiente;
+	private NodoObjetoJSON objetoSiguiente;
 
 
 	public NodoDocumentoJSON(String Nombre, ArrayList<AtributosDocumentosJSON> ArregloAtributos)
@@ -18,17 +19,20 @@ public class NodoDocumentoJSON {
 		this.setSiguiente(null);
 		this.setAnterior(null);
 		this.setDocumentoSiguiente(null);
+		this.setObjetoSiguiente(null);
 	}
 	
 
 
-	public NodoDocumentoJSON(NodoDocumentoJSON Siguiente, NodoDocumentoJSON Anterior, String Nombre, ArrayList<AtributosDocumentosJSON> ArregloAtributos, NodoDocumentoJSON DocumentoSiguiente)
+	public NodoDocumentoJSON(NodoDocumentoJSON Siguiente, NodoDocumentoJSON Anterior, String Nombre, ArrayList<AtributosDocumentosJSON> ArregloAtributos, NodoDocumentoJSON DocumentoSiguiente,
+			NodoObjetoJSON ObjetoSiguiente)
 	{
 		this.setNombre(Nombre);
 		this.setArregloAtributos(ArregloAtributos);
 		this.setSiguiente(Siguiente);
 		this.setAnterior(Anterior);
 		this.setDocumentoSiguiente(DocumentoSiguiente);
+		this.setObjetoSiguiente(ObjetoSiguiente);
 	}
 	
 	public NodoDocumentoJSON getSiguiente() {
@@ -66,6 +70,18 @@ public class NodoDocumentoJSON {
 	}
 	public void setArregloAtributos(ArrayList<AtributosDocumentosJSON> arregloAtributos) {
 		this.arregloAtributos = arregloAtributos;
+	}
+
+
+
+	public NodoObjetoJSON getObjetoSiguiente() {
+		return objetoSiguiente;
+	}
+
+
+
+	public void setObjetoSiguiente(NodoObjetoJSON objetoSiguiente) {
+		this.objetoSiguiente = objetoSiguiente;
 	}
 	
 }

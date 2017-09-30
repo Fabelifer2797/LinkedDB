@@ -45,7 +45,7 @@ public class ListaSimple {
 		}
 	}
 	
-	public void EliminarNodo(AtributosObjetosJSON ObjetoAtributos)
+	public void EliminarNodo(int ID)
 	{
 		NodoObjetoJSON actual = this.primero;
 		NodoObjetoJSON anterior = this.primero;
@@ -53,14 +53,9 @@ public class ListaSimple {
 		
 		while(actual != null)
 		{
-			for(int i = 0; i < actual.getArregloAtributos().size();i++)
+			if(actual.getID() == ID)
 			{
-				if((actual.getArregloAtributos().get(i).getNombreAtributo() == ObjetoAtributos.getNombreAtributo()) && 
-						(actual.getArregloAtributos().get(i).getAtributo() == ObjetoAtributos.getAtributo()))
-				{
-					encontrado = true;
-				}
-				
+				encontrado = true;
 			}
 			
 			if(encontrado)
@@ -100,7 +95,7 @@ public class ListaSimple {
 				if((actual.getArregloAtributos().get(i).getNombreAtributo() == atributo.getNombreAtributo()) && 
 						(actual.getArregloAtributos().get(i).getAtributo() == atributo.getAtributo()))
 				{
-					System.out.println("Elemento encontrado");
+					System.out.println("Elemento Encontrado");
 					return actual;
 				}
 				
@@ -109,7 +104,7 @@ public class ListaSimple {
 			actual = actual.getSiguiente();
 			
 		}
-		System.out.println("Elemento no encontrado");
+		System.out.println("Elemento no Encontrado");
 		return null;
 	}
 	

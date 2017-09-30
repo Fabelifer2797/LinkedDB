@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="420.0" prefWidth="475.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.datosI.linkeddb.aplicacion.ControladorVentanaCrearObjetos">
+   <top>
+      <HBox prefHeight="90.0" prefWidth="475.0" style="-fx-background-color: c6c6c6;" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="150.0" fitWidth="110.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Iconos_Objetos.png" />
+               </image>
+            </ImageView>
+            <Label alignment="CENTER" prefHeight="151.0" prefWidth="335.0" text="Crear Objetos JSON">
+               <font>
+                  <Font name="Calibri Bold" size="37.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+   </top>
+   <center>
+      <Pane prefHeight="284.0" prefWidth="475.0" style="-fx-background-color: snow;" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="14.0" layoutY="14.0" prefHeight="46.0" prefWidth="197.0" text="Atributo tipo:">
+               <font>
+                  <Font name="Calibri Bold" size="27.0" />
+               </font>
+            </Label>
+            <Label fx:id="LabelTipoAtributo" layoutX="230.0" layoutY="14.0" prefHeight="46.0" prefWidth="197.0">
+               <font>
+                  <Font name="Calibri Bold" size="27.0" />
+               </font>
+            </Label>
+            <Label layoutX="14.0" layoutY="74.0" prefHeight="46.0" prefWidth="219.0" text="Nombre del Atributo:">
+               <font>
+                  <Font name="Calibri Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="LabelNombreAtributo" layoutX="238.0" layoutY="74.0" prefHeight="46.0" prefWidth="219.0">
+               <font>
+                  <Font name="Calibri Bold" size="21.0" />
+               </font>
+            </Label>
+            <Label layoutX="14.0" layoutY="127.0" prefHeight="46.0" prefWidth="197.0" text="Inserte el atributo:">
+               <font>
+                  <Font name="Calibri Bold" size="24.0" />
+               </font>
+            </Label>
+            <TextField fx:id="TextFieldInsercion" layoutX="230.0" layoutY="138.0" prefHeight="25.0" prefWidth="224.0" />
+            <Button fx:id="BotonContinuar" layoutX="253.0" layoutY="214.0" mnemonicParsing="false" onAction="#ContinuarAgregandoAtributos" prefHeight="36.0" prefWidth="82.0" text="Continuar">
+               <font>
+                  <Font name="Calibri Bold" size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="BotonCrearObjeto" layoutX="357.0" layoutY="214.0" mnemonicParsing="false" onAction="#CrearObjetoFinal" prefHeight="37.0" prefWidth="101.0" text="CrearObjeto">
+               <font>
+                  <Font name="Calibri Bold" size="15.0" />
+               </font>
+            </Button>
+            <Label fx:id="LabelValidaciones" alignment="TOP_LEFT" layoutX="14.0" layoutY="182.0" prefHeight="120.0" prefWidth="213.0" textFill="RED" wrapText="true">
+               <font>
+                  <Font name="Calibri Bold" size="12.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+   </center>
+</BorderPane>

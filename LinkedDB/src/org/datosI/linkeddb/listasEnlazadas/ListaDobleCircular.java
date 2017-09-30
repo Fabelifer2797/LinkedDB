@@ -108,7 +108,7 @@ public class ListaDobleCircular {
 		{
 			if( Nombre.equals(actual.getNombre()))
 			{
-				System.out.println("Elemento encontrado");
+				System.out.println("Elemento EEncontrado");
 				return actual;
 			}
 			
@@ -120,7 +120,7 @@ public class ListaDobleCircular {
 		
 		if(Nombre.equals(actual.getNombre()))
 		{
-			System.out.println("Elemento encontrado");
+			System.out.println("Elemento EEncontrado");
 			return actual;
 		}
 		

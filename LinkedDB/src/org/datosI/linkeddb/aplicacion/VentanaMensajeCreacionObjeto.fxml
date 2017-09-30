@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="186.0" prefWidth="261.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.datosI.linkeddb.aplicacion.ControladorVentanaMensajeCreacionObjeto">
+   <children>
+      <Label layoutX="14.0" layoutY="136.0" text="Objeto Creado Exitosamente!">
+         <font>
+            <Font name="Calibri Bold" size="19.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="108.0" fitWidth="149.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icono_Afirmacion.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="BotonAceptar" layoutX="146.0" layoutY="39.0" mnemonicParsing="false" onAction="#Aceptar" text="Aceptar">
+         <font>
+            <Font name="Calibri Bold" size="17.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

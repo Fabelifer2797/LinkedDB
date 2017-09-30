@@ -5,59 +5,38 @@ import java.util.ArrayList;
 public class NodoObjetoJSON {
 	
 	private NodoObjetoJSON siguiente;
-	private static int Contador = 0;
-	private int ID;
-	private int IDF;
-	private int IDP;
-
+	private NodoObjetoJSON objetoSiguiente;
+	private NodoObjetoJSON llaveForanea;
 	private ArrayList<AtributosObjetosJSON> arregloAtributos;
+	private static int contador = 0;
+	private int ID;
 	
 
-	public NodoObjetoJSON(ArrayList<AtributosObjetosJSON> ArregloAtributos,int IDforaneo, int IDprimario)
+
+
+	public NodoObjetoJSON(ArrayList<AtributosObjetosJSON> ArregloAtributos)
 	{
 		this.setSiguiente(null);
 		this.setArregloAtributos(ArregloAtributos);
-		Contador++;
-		this.setID(Contador);
-		this.setIDF(IDforaneo);
-		this.setIDP(IDprimario);
+		this.setObjetoSiguiente(null);
+		this.setLlaveForanea(null);
+		contador++;
+		this.setID(contador);
+
 	}
 	
-	public NodoObjetoJSON( NodoObjetoJSON Siguiente, int IDforaneo, int IDprimario)
+	public NodoObjetoJSON( ArrayList<AtributosObjetosJSON> ArregloAtributos, NodoObjetoJSON Siguiente, NodoObjetoJSON ObjetoSiguiente,
+			NodoObjetoJSON LlaveForanea)
 	{
 		this.setSiguiente(Siguiente);
-		this.setArregloAtributos(null);
-		Contador++;
-		this.setID(Contador);
-		this.setIDF(IDforaneo);
-		this.setIDP(IDprimario);
+		this.setObjetoSiguiente(ObjetoSiguiente);
+		this.setLlaveForanea(LlaveForanea);
+		this.setArregloAtributos(ArregloAtributos);
+		contador++;
+		this.setID(contador);
+
 	}
 	
-	public int getID() {
-		return ID;
-	}
-
-	public void setID(int iD) {
-		ID = iD;
-	}
-	
-	public int getIDF() {
-		return IDF;
-	}
-
-	public void setIDF(int iDF) {
-		IDF = iDF;
-	}
-
-	public int getIDP() {
-		return IDP;
-	}
-
-	public void setIDP(int iDP) {
-		IDP = iDP;
-	}
-
-
 	public NodoObjetoJSON getSiguiente() {
 		return siguiente;
 	}
@@ -77,6 +56,30 @@ public class NodoObjetoJSON {
 	public void AgregarAtributo(AtributosObjetosJSON Atributo)
 	{
 		this.getArregloAtributos().add(Atributo);
+	}
+	
+	public int getID() {
+		return ID;
+	}
+
+	public void setID(int iD) {
+		ID = iD;
+	}
+
+	public NodoObjetoJSON getObjetoSiguiente() {
+		return objetoSiguiente;
+	}
+
+	public void setObjetoSiguiente(NodoObjetoJSON objetoSiguiente) {
+		this.objetoSiguiente = objetoSiguiente;
+	}
+
+	public NodoObjetoJSON getLlaveForanea() {
+		return llaveForanea;
+	}
+
+	public void setLlaveForanea(NodoObjetoJSON llaveForanea) {
+		this.llaveForanea = llaveForanea;
 	}
 	
 	

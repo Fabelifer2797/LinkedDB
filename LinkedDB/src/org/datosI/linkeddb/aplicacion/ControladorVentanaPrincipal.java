@@ -4,12 +4,21 @@ import org.datosI.linkeddb.documentosJSON.DocumentoJSON;
 import org.datosI.linkeddb.listasEnlazadas.*;
 import org.json.simple.JSONObject;
 
+
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+
+import java.util.List;
 import java.util.ResourceBundle;
+
+
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -20,6 +29,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.input.MouseButton;
@@ -44,11 +55,20 @@ public class ControladorVentanaPrincipal implements Initializable {
     
     @FXML
     private Button BotonCommit;
+
+	@FXML
+    private TableView<List<String>> TableViewObjetosJSON;
+
+    
+
     
     private static TreeItem<String> rootStores = new TreeItem<>("Stores");
     private static TreeItem<String> storeSeleccionado;
+    private static NodoDocumentoJSON documentoSeleccionado;
     private static ListaDoble ListaStores = new ListaDoble();
     private static ListaDobleCircular ListaDocumentos = new ListaDobleCircular();
+    private static ListaSimple ListaObjetos = new ListaSimple();
+    private static List<List<String>> data = new ArrayList<>();
     
     public ControladorVentanaPrincipal() {
     	
@@ -59,6 +79,19 @@ public class ControladorVentanaPrincipal implements Initializable {
     {
     	return ListaDocumentos;
     }
+    
+    public ListaSimple getListaObjetos()
+    {
+    	return ListaObjetos;
+    }
+    
+    public NodoDocumentoJSON getDocumentoSeleccionado() {
+		return documentoSeleccionado;
+	}
+
+	public void setDocumentoSeleccionado(NodoDocumentoJSON documentoSeleccionado) {
+		ControladorVentanaPrincipal.documentoSeleccionado = documentoSeleccionado;
+	}
     
     
     public void AgregarStoresTreeView(String nombreStore)
@@ -94,6 +127,54 @@ public class ControladorVentanaPrincipal implements Initializable {
     		aux.setDocumentoSiguiente(temporalDocumento);
     	}
 
+    }
+    
+    public void AgregarObjetosMemoria(NodoObjetoJSON nodoObjeto, ArrayList<NodoObjetoJSON> arregloNodosObjetos)
+    {
+    	ListaObjetos.InsertarFinalListaSimple(nodoObjeto);
+    	NodoDocumentoJSON temporal = documentoSeleccionado;
+    	
+    	if(temporal.getObjetoSiguiente() == null)
+    	{
+    		temporal.setObjetoSiguiente(nodoObjeto);
+    		EnlazarForaneos(nodoObjeto, arregloNodosObjetos);
+    	}
+    	
+    	else
+    	{
+    		NodoObjetoJSON temporal2 = temporal.getObjetoSiguiente();
+    		
+    		while(temporal2.getObjetoSiguiente() != null)
+    		{
+    			temporal2 = temporal2.getObjetoSiguiente();
+    		}
+    		
+    		temporal2.setObjetoSiguiente(nodoObjeto);
+    		EnlazarForaneos(nodoObjeto, arregloNodosObjetos);
+    	}
+    }
+    
+    public void EnlazarForaneos(NodoObjetoJSON nodoObjeto ,ArrayList<NodoObjetoJSON> arregloNodoObjetos)
+    {
+    	for(int i = 0; i < arregloNodoObjetos.size(); i++)
+    	{
+    		NodoObjetoJSON aux = arregloNodoObjetos.get(i);
+    		
+    		if(aux.getLlaveForanea() == null)
+    		{
+    			aux.setLlaveForanea(nodoObjeto);
+    		}
+    		
+    		else
+    		{
+    			while(aux.getLlaveForanea() != null)
+    			{
+    				aux = aux.getLlaveForanea();
+    			}
+    			
+    			aux.setLlaveForanea(nodoObjeto);
+    		}
+    	}
     }
     
     public void InicializarTreeView()
@@ -137,14 +218,32 @@ public class ControladorVentanaPrincipal implements Initializable {
     			MenuItem eliminarLosObjetos = new MenuItem("Eliminar todos los objetos");
     			MenuItem eliminarDocumento = new MenuItem("Eliminar documento");
     			MenuItem buscarObjetos = new MenuItem("Buscar Objetos por atributo");
-    			MenuItem eliminarObjetoPorLlave = new MenuItem("Eliminar un objeto por llave");
+    			MenuItem buscarObjetoPorLlave = new MenuItem("Buscar Objetos por llave");
+    			documentoSeleccionado = ListaDocumentos.BuscarDocumento(item.getValue());
     			
     			crearObjetoItem.setOnAction(new EventHandler<ActionEvent>()
     			{
     				@Override
     				public void handle(ActionEvent arg0)
     				{
+    		        	try{
+    		        		
+    		        		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/org/datosI/linkeddb/aplicacion/VentanaCrearObjetos.fxml"));
+    		        		Parent parent = (Parent) fxmlLoader.load();
+    		        		Stage stage = new Stage();
+    		        		stage.setTitle("Ventana Crear Objetos");
+    		        		stage.setResizable(false);
+    		        		stage.setScene(new Scene(parent));
+    		        		stage.show();
+    		        		
+    		        	}
+    		        	
+    		        	catch (Exception e)
+    		        	{
+    		        		System.out.println("No se pudo abrir la ventana crear objetos");
+    		        	}
     					System.out.println("Crear un objeto click");
+    					
     				}
     			}
     					);
@@ -154,6 +253,7 @@ public class ControladorVentanaPrincipal implements Initializable {
     				@Override
     				public void handle(ActionEvent arg0)
     				{
+    					MostrarObjetos();
     					System.out.println("Mostrar objetos click");
     				}
     			}
@@ -164,6 +264,7 @@ public class ControladorVentanaPrincipal implements Initializable {
     				@Override
     				public void handle(ActionEvent arg0)
     				{
+    					
     					System.out.println("Eliminar todos los objetos click");
     				}
     			}
@@ -189,18 +290,18 @@ public class ControladorVentanaPrincipal implements Initializable {
     			}
     					);
     			
-    			eliminarObjetoPorLlave.setOnAction(new EventHandler<ActionEvent>()
+    			buscarObjetoPorLlave.setOnAction(new EventHandler<ActionEvent>()
     			{
     				@Override
     				public void handle(ActionEvent arg0)
     				{
-    					System.out.println("Eliminar un objeto por llave click");
+    					System.out.println("Buscar Objetos por llave click");
     				}
     			}
     					);
     			
     			TreeViewPrincipal.setContextMenu(new ContextMenu(crearObjetoItem,mostrarObjetosItem,eliminarLosObjetos,eliminarDocumento,
-    					buscarObjetos,eliminarObjetoPorLlave));
+    					buscarObjetos,buscarObjetoPorLlave));
     			System.out.println("Click Derecho en el item documento");
     		}
 
@@ -216,7 +317,8 @@ public class ControladorVentanaPrincipal implements Initializable {
 
     }
     
-    public boolean VerificarStore(String nombre)
+
+	public boolean VerificarStore(String nombre)
     {
     	NodoStoreJSON nodoTemporal = ListaStores.BuscarStore(nombre);
     	
@@ -272,6 +374,16 @@ public class ControladorVentanaPrincipal implements Initializable {
     		{
     			arregloObjetosJSON.add(GuardarDocumentosJSON(nodoDocumento,arregloRutas));
     			arregloNombresD.add(nodoDocumento.getNombre());
+    			JSONObject rootObjeto = new JSONObject();
+    			NodoObjetoJSON nodoObjeto = nodoDocumento.getObjetoSiguiente();
+    			while(nodoObjeto != null)
+    			{
+    				DocumentoJSON documento2 = new DocumentoJSON();
+    				rootObjeto.put( Integer.toString(nodoObjeto.getID()), documento2.EscribirObjetos(nodoObjeto.getArregloAtributos()));
+    				nodoObjeto= nodoObjeto.getObjetoSiguiente();
+    			}
+    			
+    			GuardarObjetosJSON(nodoDocumento.getNombre(),arregloRutas.get(0),rootObjeto);
     			nodoDocumento = nodoDocumento.getDocumentoSiguiente();
     		}
     		
@@ -378,11 +490,84 @@ public class ControladorVentanaPrincipal implements Initializable {
     	}
     }
     
+    public void GuardarObjetosJSON(String nombreDocumento, File rutaCarpeta, JSONObject raizObjeto)
+    {
+    	File ObjetoJSON = new File(rutaCarpeta.getAbsolutePath() + File.separator + nombreDocumento + ".json");
+    	
+		try
+		{
+			FileWriter escritura = new FileWriter(ObjetoJSON.getAbsolutePath());
+			escritura.write(raizObjeto.toJSONString());
+			escritura.close();
+			
+		}
+		
+		catch(IOException e)
+		{
+			System.out.println(e.toString());
+		}
+    	
+    	
+    }
+ 
+
+	public void MostrarObjetos()
+    {
+		data.clear();
+		TableViewObjetosJSON.getItems().clear();
+		TableViewObjetosJSON.getColumns().clear();
+		ArrayList<AtributosDocumentosJSON> arregloAtributos = documentoSeleccionado.getArregloAtributos();
+		
+		for (int i = 0; i < arregloAtributos.size(); i++)
+		{
+			int Index = i;
+			
+			TableColumn<List<String>, String> atributoColumna = new TableColumn<>(arregloAtributos.get(i).getNombre());
+			atributoColumna.setMinWidth(125);
+			atributoColumna.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().get(Index)));
+			TableViewObjetosJSON.getColumns().add(atributoColumna);
+			
+			
+		}
+		
+		NodoObjetoJSON nodoObjeto = documentoSeleccionado.getObjetoSiguiente();
+		
+		if(nodoObjeto == null)
+		{
+	    	ObservableList<List<String>> lista = FXCollections.observableArrayList(data);
+	    	TableViewObjetosJSON.setItems(lista);
+		}
+		
+		else
+		{
+			
+			while(nodoObjeto != null)
+			{
+				
+				List<String> row = new ArrayList<>();
+				ArrayList<AtributosObjetosJSON> arreglo1 = nodoObjeto.getArregloAtributos();
+				
+				for(int i = 0; i < arreglo1.size(); i++)
+				{
+					row.add(arreglo1.get(i).getAtributo());
+				}
+				
+				data.add(row);
+				nodoObjeto = nodoObjeto.getObjetoSiguiente();
+				
+			}
+			
+	    	ObservableList<List<String>> lista = FXCollections.observableArrayList(data);
+	    	TableViewObjetosJSON.setItems(lista);	
+		}	
+    	
+    }
  
     
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		InicializarTreeView();
+		
 	}
 	
 

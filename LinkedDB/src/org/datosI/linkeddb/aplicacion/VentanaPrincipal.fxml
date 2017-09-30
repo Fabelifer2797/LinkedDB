@@ -11,11 +11,7 @@
 <AnchorPane fx:id="PanelVentanaPrincipal" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="597.0" prefWidth="735.0" style="-fx-background-color: aliceblue;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.datosI.linkeddb.aplicacion.ControladorVentanaPrincipal">
    <children>
       <TreeView fx:id="TreeViewPrincipal" layoutX="-1.0" layoutY="106.0" onMouseClicked="#ItemSeleccionado" AnchorPane.leftAnchor="-1.0" />
-      <TableView layoutX="304.0" layoutY="106.0" prefHeight="476.0" prefWidth="412.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="304.0" AnchorPane.rightAnchor="19.0" AnchorPane.topAnchor="106.0">
-        <columns>
-          <TableColumn prefWidth="75.0" text="Objeto No." />
-        </columns>
-      </TableView>
+      <TableView fx:id="TableViewObjetosJSON" layoutX="304.0" layoutY="106.0" prefHeight="476.0" prefWidth="412.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="304.0" AnchorPane.rightAnchor="19.0" AnchorPane.topAnchor="106.0" />
       <Text layoutX="304.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tabla. Objetos JSON " AnchorPane.topAnchor="58.1015625">
          <font>
             <Font name="System Bold" size="24.0" />
